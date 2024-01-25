@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:space_media_app/core/errors/errors.dart';
 import 'package:space_media_app/features/space_media/data/datasources/datasource.dart';
 import 'package:space_media_app/features/space_media/data/models/models.dart';
 import 'package:space_media_app/features/space_media/data/repositories/repositories.dart';
@@ -34,6 +35,20 @@ void main() {
 
     // Assert
     expect(result, const Right(tSpaceMediaModel));
-     verify(() => dataSource.getSpaceMediaFromDate(date: tDate)).called(1);
+    verify(() => dataSource.getSpaceMediaFromDate(date: tDate)).called(1);
+  });
+
+  test(
+      'Should return a Server Failure when the call to datasource is unsuccessful',
+      () async {
+    // Arrange
+    when(() => dataSource.getSpaceMediaFromDate(date: tDate))
+        .thenThrow(ServerException());
+
+    // Act
+    final result = await repository.getSpaceMediaFromDate(date: tDate);
+    // Assert
+    expect(result, Left(ServerFailure()));
+    verify(() => dataSource.getSpaceMediaFromDate(date: tDate)).called(1);
   });
 }
