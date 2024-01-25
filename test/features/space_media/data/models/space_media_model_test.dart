@@ -40,7 +40,7 @@ void main() {
 
     // Act
     final result = tSpaceMediaModel.toJson();
-    
+
     // Assert
     expect(result, expectedMap);
   });

@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/errors/errors.dart';
 import '../../domain/entities/entities.dart';
 import '../../domain/repositories/repositories.dart';
-import '../datasources/datasource.dart';
+import '../datasources/datasources.dart';
 
 class SpaceMediaRepositoryImpl implements ISpaceMediaRepository {
   final ISpaceMediaDatasource datasource;

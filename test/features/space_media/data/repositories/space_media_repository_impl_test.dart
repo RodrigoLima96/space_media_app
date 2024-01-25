@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:space_media_app/core/errors/errors.dart';
-import 'package:space_media_app/features/space_media/data/datasources/datasource.dart';
+import 'package:space_media_app/features/space_media/data/datasources/datasources.dart';
 import 'package:space_media_app/features/space_media/data/models/models.dart';
 import 'package:space_media_app/features/space_media/data/repositories/repositories.dart';
 
