@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:space_media_app/features/space_media/data/models/models.dart';
 import 'package:space_media_app/features/space_media/domain/entities/entities.dart';
 
-import '../../mocks/space_media_mock.dart';
+import '../../mocks/space_media_json_mock.dart';
 
 void main() {
   const tSpaceMediaModel = SpaceMediaModel(
@@ -20,7 +20,7 @@ void main() {
 
   test('Should return a valid model', () {
     // Arrange
-    final Map<String, dynamic> jsonMap = json.decode(spaceMediaMock);
+    final Map<String, dynamic> jsonMap = json.decode(spaceMediaJsonMock);
 
     // Act
     final result = SpaceMediaModel.fromJson(jsonMap);

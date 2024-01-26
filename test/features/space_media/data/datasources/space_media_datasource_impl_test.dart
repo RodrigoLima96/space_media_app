@@ -6,7 +6,7 @@ import 'package:space_media_app/core/utils/converters/date_to_string_converter.d
 import 'package:space_media_app/features/space_media/data/datasources/datasources.dart';
 import 'package:space_media_app/features/space_media/data/models/models.dart';
 
-import '../../mocks/space_media_mock.dart';
+import '../../mocks/space_media_json_mock.dart';
 
 class HttpClientMock extends Mock implements HttpClient {}
 
@@ -25,7 +25,7 @@ void main() {
 
   void successMock() {
     when(() => client.get(url: any(named: 'url'))).thenAnswer(
-        (_) async => const HttpResponse(data: spaceMediaMock, statusCode: 200));
+        (_) async => const HttpResponse(data: spaceMediaJsonMock, statusCode: 200));
   }
 
   test('Should call the get method with correct url', () async {

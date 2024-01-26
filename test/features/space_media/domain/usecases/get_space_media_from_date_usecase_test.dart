@@ -6,6 +6,9 @@ import 'package:space_media_app/features/space_media/domain/entities/entities.da
 import 'package:space_media_app/features/space_media/domain/repositories/repositories.dart';
 import 'package:space_media_app/features/space_media/domain/usecases/usecases.dart';
 
+import '../../mocks/date_mock.dart';
+import '../../mocks/space_media_entity_mock.dart';
+
 class MockSpaceMediaRepository extends Mock implements ISpaceMediaRepository {}
 
 void main() {
@@ -17,25 +20,17 @@ void main() {
     usecase = GetSpaceMediaFromDateUsecase(repository: repository);
   });
 
-  const tSpaceMedia = SpaceMediaEntity(
-    description: 'description',
-    mediaType: 'mediaType',
-    title: 'title',
-    mediaUrl: 'mediaUrl',
-  );
-  final tDate = DateTime(2024, 05, 05);
-
   test('Should get space media entity for a given date from the repository',
       () async {
     // Arrange
     when(() => repository.getSpaceMediaFromDate(date: tDate))
-        .thenAnswer((_) async => const Right(tSpaceMedia));
+        .thenAnswer((_) async => const Right(tSpaceMediaEntityMock));
 
     // Act
     final result = await usecase(tDate);
 
     // Assert
-    expect(result, const Right(tSpaceMedia));
+    expect(result, const Right(tSpaceMediaEntityMock));
     verify(() => repository.getSpaceMediaFromDate(date: tDate)).called(1);
   });
 

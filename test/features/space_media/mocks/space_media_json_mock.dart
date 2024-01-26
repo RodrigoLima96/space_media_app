@@ -1,4 +1,4 @@
-const spaceMediaMock = """
+const spaceMediaJsonMock = """
   {
     "copyright": "Frank Kuszaj",
     "date": "2024-01-25",
