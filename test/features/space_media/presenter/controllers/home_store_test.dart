@@ -29,7 +29,6 @@ void main() {
 
     // Assert
     store.observer(onState: (state) {
-      print(state);
       expect(state, tSpaceMediaEntityMock);
       verify(() => mockUsecase(tDate)).called(1);
     });
