@@ -36,8 +36,9 @@ void main() {
 
   test('should return a ServerFailure when don\'t succeed', () async {
     // Arrange
-    when(() => repository.getSpaceMediaFromDate(date: tDate)).thenAnswer(
-        (_) async => Left<Failure, SpaceMediaEntity>(ServerFailure()));
+    when(() => repository.getSpaceMediaFromDate(date: any(named: 'date')))
+        .thenAnswer(
+            (_) async => Left<Failure, SpaceMediaEntity>(ServerFailure()));
 
     // Act
     final result = await usecase(tDate);
@@ -46,5 +47,16 @@ void main() {
     expect(result, Left(ServerFailure()));
     verify(() => repository.getSpaceMediaFromDate(date: tDate)).called(1);
   });
-  
+
+  test('Should return a NullParamsFailure when receives a null param',
+      () async {
+    // Arrange
+
+    // Act
+    final result = await usecase(null);
+
+    // Assert
+    expect(result, Left(NullParamsFailure()));
+    verifyNever(() => repository.getSpaceMediaFromDate(date: tDate));
+  });
 }
