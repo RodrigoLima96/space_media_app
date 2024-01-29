@@ -5,17 +5,11 @@ import 'package:space_media_app/features/space_media/data/models/models.dart';
 import 'package:space_media_app/features/space_media/domain/entities/entities.dart';
 
 import '../../mocks/space_media_json_mock.dart';
+import '../../mocks/space_media_model_mock.dart';
 
 void main() {
-  const tSpaceMediaModel = SpaceMediaModel(
-    description: 'description',
-    mediaType: 'mediaType',
-    title: 'title',
-    mediaUrl: 'mediaUrl',
-  );
-
   test('Should be a subclass of SpaceMediaEntity', () {
-    expect(tSpaceMediaModel, isA<SpaceMediaEntity>());
+    expect(tSpaceMediaModelMock, isA<SpaceMediaEntity>());
   });
 
   test('Should return a valid model', () {
@@ -26,7 +20,7 @@ void main() {
     final result = SpaceMediaModel.fromJson(jsonMap);
 
     // Assert
-    expect(result, tSpaceMediaModel);
+    expect(result, tSpaceMediaModelMock);
   });
 
   test('Should return a json map containing the proper data', () {
@@ -39,7 +33,7 @@ void main() {
     };
 
     // Act
-    final result = tSpaceMediaModel.toJson();
+    final result = tSpaceMediaModelMock.toJson();
 
     // Assert
     expect(result, expectedMap);

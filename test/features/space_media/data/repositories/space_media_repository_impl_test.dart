@@ -3,8 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:space_media_app/core/errors/errors.dart';
 import 'package:space_media_app/features/space_media/data/datasources/datasources.dart';
-import 'package:space_media_app/features/space_media/data/models/models.dart';
 import 'package:space_media_app/features/space_media/data/repositories/repositories.dart';
+
+import '../../mocks/date_mock.dart';
+import '../../mocks/space_media_model_mock.dart';
 
 class MockSpaceMediaDatasource extends Mock implements ISpaceMediaDatasource {}
 
@@ -17,24 +19,16 @@ void main() {
     repository = SpaceMediaRepositoryImpl(datasource: dataSource);
   });
 
-  final tDate = DateTime(2024, 05, 05);
-  const tSpaceMediaModel = SpaceMediaModel(
-    description: 'description',
-    mediaType: 'mediaType',
-    title: 'title',
-    mediaUrl: 'mediaUrl',
-  );
-
   test('Should return SpaceMediaModel when calls the datasource', () async {
     // Arrange
-    when(() => dataSource.getSpaceMediaFromDate(date: tDate))
-        .thenAnswer((_) async => tSpaceMediaModel);
+    when(() => dataSource.getSpaceMediaFromDate(date: any(named: 'date')))
+        .thenAnswer((_) async => tSpaceMediaModelMock);
 
     // Act
     final result = await repository.getSpaceMediaFromDate(date: tDate);
 
     // Assert
-    expect(result, const Right(tSpaceMediaModel));
+    expect(result, const Right(tSpaceMediaModelMock));
     verify(() => dataSource.getSpaceMediaFromDate(date: tDate)).called(1);
   });
 
@@ -42,7 +36,7 @@ void main() {
       'Should return a Server Failure when the call to datasource is unsuccessful',
       () async {
     // Arrange
-    when(() => dataSource.getSpaceMediaFromDate(date: tDate))
+    when(() => dataSource.getSpaceMediaFromDate(date: any(named: 'date')))
         .thenThrow(ServerException());
 
     // Act
